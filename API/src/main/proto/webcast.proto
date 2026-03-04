@@ -1589,3 +1589,49 @@ message WebcastLinkMicBattleItemCard {
     }
   }
 }
+
+message WebcastGoodyBagMessage {
+  CommonMessageData base_message = 1;
+  GoodyBagBaseInfo base_info = 2;
+  repeated GoodyBagWinnerInfo winners = 3;
+  GoodyBagMessageType type = 4;
+
+  message GoodyBagBaseInfo {
+    string goody_bag_id = 1;
+    GoodyBagBiz biz = 2;
+    string room_id = 3;
+    GoodyBagCommonDetail common_detail = 4;
+    GoodyBagCoinDetail coin_detail = 5;
+
+    message GoodyBagCommonDetail {
+      int32 winner_headcount = 1;
+      int32 joined_headcount = 2;
+      ParticipateMethod participate_method = 3;
+      string participate_method_content = 4;
+      int32 open_at = 5;
+      int32 count_down_minutes = 6;
+      ParticipateThresholdSelected participate_threshold_selected = 7;
+
+      message ParticipateThresholdSelected {
+        ParticipateThresholdType type = 1;
+        int64 value = 2;
+      }
+    }
+
+    message GoodyBagCoinDetail {
+      int32 total_coin = 1;
+    }
+  }
+
+  message GoodyBagWinnerInfo {
+    GoodyBagUserInfo user_info = 1;
+    int32 coins = 2;
+  }
+
+  message GoodyBagUserInfo {
+    string user_id = 1;
+    string nickname = 2;
+    string display_id = 3;
+    Image avatar = 4;
+  }
+}

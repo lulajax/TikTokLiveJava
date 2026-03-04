@@ -26,10 +26,7 @@ import io.github.jwdeveloper.dependance.api.DependanceContainer;
 import io.github.jwdeveloper.tiktok.data.events.*;
 import io.github.jwdeveloper.tiktok.data.events.link.*;
 import io.github.jwdeveloper.tiktok.mappers.data.MappingResult;
-import io.github.jwdeveloper.tiktok.mappers.handlers.TikTokCommonEventHandler;
-import io.github.jwdeveloper.tiktok.mappers.handlers.TikTokGiftEventHandler;
-import io.github.jwdeveloper.tiktok.mappers.handlers.TikTokRoomInfoEventHandler;
-import io.github.jwdeveloper.tiktok.mappers.handlers.TikTokSocialMediaEventHandler;
+import io.github.jwdeveloper.tiktok.mappers.handlers.*;
 import io.github.jwdeveloper.tiktok.messages.webcast.*;
 
 import static io.github.jwdeveloper.tiktok.messages.enums.LinkMessageType.*;
@@ -57,7 +54,6 @@ public class MessagesMapperFactory {
             var messageObject = mapperHelper.bytesToWebcastObject(inputBytes, WebcastCaptionMessage.class);
             return MappingResult.of(messageObject, new TikTokCaptionEvent(messageObject));
         });
-
 
         //User Interactions events
         mapper.forMessage(WebcastChatMessage.class, (inputBytes, messageName, mapperHelper) ->
@@ -145,7 +141,10 @@ public class MessagesMapperFactory {
         //Others events
         //  mapper.webcastObjectToConstructor(WebcastInRoomBannerMessage.class, TikTokInRoomBannerEvent.class);
         //   mapper.webcastObjectToConstructor(WebcastMsgDetectMessage.class, TikTokDetectEvent.class);
-        //   mapper.webcastObjectToConstructor(WebcastBarrageMessage.class, TikTokBarrageEvent.class);
+        mapper.forMessage(WebcastBarrageMessage.class, (inputBytes, messageName, mapperHelper) -> {
+            var message = mapperHelper.bytesToWebcastObject(inputBytes, WebcastBarrageMessage.class);
+            return MappingResult.of(message, new TikTokBarrageEvent(message));
+        });
         //   mapper.webcastObjectToConstructor(WebcastUnauthorizedMemberMessage.class, TikTokUnauthorizedMemberEvent.class);
         //   mapper.webcastObjectToConstructor(WebcastOecLiveShoppingMessage.class, TikTokShopEvent.class);
         //   mapper.webcastObjectToConstructor(WebcastImDeleteMessage.class, TikTokIMDeleteEvent.class);

@@ -39,9 +39,12 @@ public class TikTokBarrageEvent extends TikTokHeaderEvent {
     private final String eventName;
     private final int duration;
     private final BarrageParam barrageParam;
+    // Expose for now until we know what this is used for
+    private final WebcastBarrageMessage barrageMessage;
 
     public TikTokBarrageEvent(WebcastBarrageMessage msg) {
         super(msg.getCommon());
+        this.barrageMessage = msg;
         icon = Picture.map(msg.getIcon());
         eventName = msg.getEvent().getEventName();
         backGround = Picture.map(msg.getBackground());
