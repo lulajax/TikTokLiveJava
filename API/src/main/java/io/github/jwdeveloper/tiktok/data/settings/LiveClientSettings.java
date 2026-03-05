@@ -41,9 +41,9 @@ public class LiveClientSettings {
 
     /**
      * Fetch and download gifts data before TikTokLive starts
-     * @apiNote If `false`, client.giftManager() does not contain initial gifts
+     * @apiNote Defaults to {@code false} - If {@code false}, client.giftManager() does not contain initial gifts
      */
-    private boolean fetchGifts = true;
+    private boolean fetchGifts = false;
 
     /**
      * ISO-Language for Client
